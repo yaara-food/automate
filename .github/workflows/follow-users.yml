@@ -1,9 +1,12 @@
 name: Follow users
 
-on:
+"on":
+  workflow_dispatch:
+  push:
+    branches:
+      - master
   schedule:
     - cron: "*/5 * * * *"
-  workflow_dispatch:
 
 concurrency:
   group: follow-users
