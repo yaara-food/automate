@@ -1,0 +1,40 @@
+name: Unfollow users
+
+on:
+  schedule:
+    - cron: "0,30 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: unfollow-users
+  cancel-in-progress: true
+
+env:
+  POSTGRES_DATABASE_URL: ${{ secrets.POSTGRES_DATABASE_URL }}
+  GITHUB_TOKEN: ${{ secrets.GIT_BOT_GITHUB_TOKEN }}
+  PYTHON_VERSION: "3.14"
+
+jobs:
+  unfollow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: "pip"
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run unfollow batch
+        run: |
+          python -c "import asyncio; from actions.user_actions import GitHubFollowActions; asyncio.run(GitHubFollowActions.unfollow_batch(20))"

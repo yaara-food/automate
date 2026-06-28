@@ -1,0 +1,11 @@
+docker rm -f git-bot
+docker volume rm postgres_git_bot
+docker volume create postgres_git_bot
+
+docker run --name git-bot \
+  -e POSTGRES_USER=admin \
+  -e POSTGRES_PASSWORD=admin \
+  -p 5469:5432 \
+  -v postgres_git_bot:/var/lib/postgresql \
+  -d postgres:18
+

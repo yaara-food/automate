@@ -1,0 +1,4 @@
+sqlmodel==0.0.37
+sqlalchemy[asyncio]==2.0.47
+psycopg[binary,pool]==3.3.3
+requests==2.34.2

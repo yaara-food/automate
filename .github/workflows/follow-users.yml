@@ -1,0 +1,47 @@
+name: Follow users
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: follow-users
+  cancel-in-progress: true
+
+env:
+  POSTGRES_DATABASE_URL: ${{ secrets.POSTGRES_DATABASE_URL }}
+  GITHUB_TOKEN: ${{ secrets.GIT_BOT_GITHUB_TOKEN }}
+  PYTHON_VERSION: "3.14"
+
+jobs:
+  follow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Debug trigger
+        run: |
+          echo "event=${{ github.event_name }}"
+          echo "ref=${{ github.ref }}"
+          echo "sha=${{ github.sha }}"
+          date -u
+
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: "pip"
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run follow batch
+        run: |
+          python -c "import asyncio; from actions.user_actions import GitHubFollowActions; asyncio.run(GitHubFollowActions.follow_batch(15))"
