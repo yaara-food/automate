@@ -6,7 +6,7 @@ name: Follow users
     branches:
       - master
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "15,45 * * * *"
 
 concurrency:
   group: follow-users

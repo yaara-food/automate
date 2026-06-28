@@ -1,9 +1,12 @@
 name: Unfollow users
 
-on:
+"on":
+  workflow_dispatch:
+  push:
+    branches:
+      - master
   schedule:
     - cron: "0,30 * * * *"
-  workflow_dispatch:
 
 concurrency:
   group: unfollow-users
@@ -17,9 +20,16 @@ env:
 jobs:
   unfollow:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 20
 
     steps:
+      - name: Debug trigger
+        run: |
+          echo "event=${{ github.event_name }}"
+          echo "ref=${{ github.ref }}"
+          echo "sha=${{ github.sha }}"
+          date -u
+
       - name: Checkout
         uses: actions/checkout@v5
 
