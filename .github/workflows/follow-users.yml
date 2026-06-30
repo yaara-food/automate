@@ -6,8 +6,7 @@ name: Follow users
     branches:
       - master
   schedule:
-    - cron: "15,45 * * * *"
-
+    - cron: "*/20 * * * *"
 concurrency:
   group: follow-users
   cancel-in-progress: true

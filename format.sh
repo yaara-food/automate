@@ -10,7 +10,7 @@ black .
 echo "Running ruff (lint)..."
 #ruff check . --exclude data
 #ruff check . --exclude data --fix --unsafe-fixes
-ruff check . --exclude data --fix
+ruff check .  --fix
 
 
 rm -rf .ruff_cache  .idea

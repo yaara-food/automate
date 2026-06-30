@@ -116,7 +116,7 @@ def import_sql(db_url):
 
 
 def run_sql():
-    db_source = "postgres://admin:admin@localhost:5446/admin"
+    db_source = "postgresql+psycopg://admin:admin@0.0.0.0:5469/postgres"
     db_source = normalize_url(Config.POSTGRES_DATABASE_URL)
 
     print("SOURCE =", db_source)
@@ -128,3 +128,18 @@ def run_sql():
 
 if __name__ == "__main__":
     run_sql()
+
+
+"""
+docker rm -f git-bot
+docker volume rm postgres_git_bot
+docker volume create postgres_git_bot
+
+docker run --name git-bot \
+  -e POSTGRES_USER=admin \
+  -e POSTGRES_PASSWORD=admin \
+  -p 5469:5432 \
+  -v postgres_git_bot:/var/lib/postgresql \
+  -d postgres:18
+
+"""

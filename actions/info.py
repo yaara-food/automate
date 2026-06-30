@@ -84,10 +84,9 @@ class GitHubInfo(Models):
 
 async def main():
     await GitHubInfo.current()
-    await GitHubInfo.list_following()
-    await GitHubInfo.list_followers()
-    await GitHubInfo.make_unfollow_list()
-    # await Models.to_unfollow.delete_rows()
+    # await GitHubInfo.list_following()
+    # await GitHubInfo.list_followers()
+    # await GitHubInfo.make_unfollow_list()
 
 
 if __name__ == "__main__":

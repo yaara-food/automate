@@ -46,8 +46,8 @@ class GitBotStatistics(Models):
 
 
 async def main():
-    await GitBotStatistics.followed_stat(1)
-    await GitBotStatistics.unfollowed_stat(1)
+    await GitBotStatistics.followed_stat(2)
+    await GitBotStatistics.unfollowed_stat(2)
 
 
 if __name__ == "__main__":
