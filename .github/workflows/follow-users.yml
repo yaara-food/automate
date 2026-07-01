@@ -46,4 +46,4 @@ jobs:
 
       - name: Run follow batch
         run: |
-          python -c "import asyncio; from actions.user_actions import GitHubFollowActions; asyncio.run(GitHubFollowActions.follow_batch(15))"
+          python -c "import asyncio; from actions.user_actions import GitHubFollowActions; asyncio.run(GitHubFollowActions.follow_batch(45))"

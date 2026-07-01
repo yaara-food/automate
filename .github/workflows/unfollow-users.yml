@@ -6,7 +6,7 @@ name: Unfollow users
     branches:
       - master
   schedule:
-    - cron: "*/20 * * * *"
+    - cron: "*/15 * * * *"
 
 concurrency:
   group: unfollow-users
@@ -47,4 +47,4 @@ jobs:
 
       - name: Run unfollow batch
         run: |
-          python -c "import asyncio; from actions.user_actions import GitHubFollowActions; asyncio.run(GitHubFollowActions.unfollow_batch(20))"
+          python -c "import asyncio; from actions.user_actions import GitHubFollowActions; asyncio.run(GitHubFollowActions.unfollow_batch(60))"

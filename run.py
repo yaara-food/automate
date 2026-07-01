@@ -3,7 +3,7 @@ import asyncio
 from actions.user_actions import GitHubFollowActions
 
 if __name__ == "__main__":
-    asyncio.run(GitHubFollowActions.follow_batch(355))
+    # asyncio.run(GitHubFollowActions.follow_batch(355))
     asyncio.run(GitHubFollowActions.unfollow_batch(955))
     # print()
     # while True:
